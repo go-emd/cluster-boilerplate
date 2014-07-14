@@ -1,0 +1,55 @@
+{
+	"Nfs": false,
+	"GUI_port": "30000",
+	"Nodes": [
+		{
+			"Hostname": "localhost",
+			"Workers": [
+				{
+					"Name": "Source",
+					"Connections": [
+						{
+							"Type": "LocalEgress",
+							"Worker": "Uppercase",
+							"Alias": "Source_and_Uppercase",
+							"Buffer": "0"
+						}
+					]
+				},
+				{
+					"Name": "Uppercase",
+					"Connections": [
+						{
+							"Type": "LocalIngress",
+							"Worker": "Source",
+							"Alias": "Source_and_Uppercase",
+							"Buffer": "0"
+						},
+						{
+							"Type": "ExternalEgress",
+							"Worker": "127.0.0.1",
+							"Alias": "Sink_and_Uppercase",
+							"Buffer": "0"
+						}
+					]
+				}
+			]
+		},
+		{
+			"Hostname": "127.0.0.1",
+			"Workers": [
+				{
+					"Name": "Sink",
+					"Connections": [
+						{
+							"Type": "ExternalIngress",
+							"Worker": "localhost",
+							"Alias": "Sink_and_Uppercase",
+							"Buffer": "100"
+						}
+					]
+				}
+			]
+		}
+	]
+}
