@@ -40,7 +40,7 @@ func (w Source) Run() {
 			} else if cmd == "STATUS" {
 				w.Ports()["MGMT_Source"].Channel() <- "Healthy"
 			} else if cmd == "METRICS" {
-				w.Ports()["MGMT_Source"].Channel() <- "{\"metrics\": []}"
+				w.Ports()["MGMT_Source"].Channel() <-  Metric{"health": "TODO metrics."}
 			}
 		case data := <-w.Ports()["Source_and_Uppercase"].Channel():
 			log.INFO.Println(data)

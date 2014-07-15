@@ -42,7 +42,7 @@ func (w Uppercase) Run() {
 			} else if cmd == "STATUS" {
 				w.Ports()["MGMT_Uppercase"].Channel() <- "Healthy"
 			} else if cmd == "METRICS" {
-				w.Ports()["MGMT_Uppercase"].Channel() <- "METRICS?"
+				w.Ports()["MGMT_Uppercase"].Channel() <- Metric{"health": "TODO metrics."}
 			}
 		case data := <-w.Ports()["Source_and_Uppercase"].Channel():
 		w.Ports()["Sink_and_Uppercase"].Channel() <- strings.ToUpper(data.(string))
