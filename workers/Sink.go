@@ -4,7 +4,6 @@ import (
 	"emd/connector"
 	"emd/log"
 	"emd/worker"
-	"encoding/gob"
 )
 
 type Sink struct {
@@ -17,10 +16,9 @@ func (w Sink) Init() {
 	}
 
 	// Set the ExternalIngress type
-	gob.Register(new(Tuple))
-	w.Ports()["Sink_and_Uppercase"].(*connector.ExternalUDPIngress).Buf = new(Tuple)
+	w.Ports()["Sink_and_Uppercase"].(*connector.ExternalUDPIngress).Register(new(Tuple))
 
-	log.INFO.Println("Worker " + w.Name + " inited.")
+	log.INFO.Println("Worker " + w.Name_ + " inited.")
 }
 
 func (w Sink) Run() {
@@ -56,5 +54,5 @@ func (w Sink) Stop() {
 	w.Ports()["MGMT_Sink"].Close()
 	w.Ports()["Sink_and_Uppercase"].Close()
 
-	log.INFO.Println("Worker " + w.Name + " stopped.")
+	log.INFO.Println("Worker " + w.Name_ + " stopped.")
 }

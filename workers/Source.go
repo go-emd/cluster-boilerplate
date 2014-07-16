@@ -14,7 +14,7 @@ func (w Source) Init() {
 		p.Open()
 	}
 
-	log.INFO.Println("Worker " + w.Name + " inited.")
+	log.INFO.Println("Worker " + w.Name_ + " inited.")
 }
 
 func (w Source) Run() {
@@ -52,5 +52,5 @@ func (w Source) Stop() {
 	w.Ports()["MGMT_Source"].Close()
 	w.Ports()["Source_and_Uppercase"].Close()
 
-	log.INFO.Println("Worker " + w.Name + " stopped.")
+	log.INFO.Println("Worker " + w.Name_ + " stopped.")
 }
