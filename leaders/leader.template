@@ -87,6 +87,7 @@ func main() {
 	nodeLeader := &leader.Lead{
 		core.Core{"NodeLeader"},
 		"{{.GuiPort}}",
+		"{{.ConfigPath}}",
 		workers,
 		map[string]connector.Connector{
 			{{range $wc := .Node.Workers}}

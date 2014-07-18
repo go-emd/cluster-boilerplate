@@ -37,10 +37,11 @@ func getPort(alias string) int {
  * Create node specific leader files.
  *
  */
-func createLeader(lPath string, node config.NodeConfig, guiPort string) error {
+func createLeader(lPath string, node config.NodeConfig, guiPort, cPath string) error {
 	type tType struct {
 		Node    config.NodeConfig
 		GuiPort string
+		ConfigPath string
 	}
 
 	tmpl := template.New("leader.template")
@@ -56,7 +57,7 @@ func createLeader(lPath string, node config.NodeConfig, guiPort string) error {
 	}
 	defer f.Close()
 
-	err = tmpl.Execute(f, tType{node, guiPort})
+	err = tmpl.Execute(f, tType{node, guiPort, cPath})
 	if err != nil {
 		return err
 	}
@@ -78,7 +79,7 @@ func main() {
 	// Loop through all nodes in config and create
 	//   leader files for each.
 	for _, n := range cfg.Nodes {
-		err := createLeader(os.Args[1]+"/leaders", n, cfg.GUI_port)
+		err := createLeader(os.Args[1]+"/leaders", n, cfg.GUI_port, os.Args[1]+"/config.json")
 		if err != nil {
 			log.ERROR.Println(err)
 			os.Exit(1)
