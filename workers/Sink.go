@@ -1,9 +1,9 @@
 package workers
 
 import (
-	"emd/connector"
-	"emd/log"
-	"emd/worker"
+	"github.com/go-emd/emd/connector"
+	"github.com/go-emd/emd/log"
+	"github.com/go-emd/emd/worker"
 )
 
 type Sink struct {
